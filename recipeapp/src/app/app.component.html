@@ -1,12 +1,16 @@
 <div class="ui container">
   <div class="ui basic segment">
-    <app-add-recipe (newRecipe)="newRecipeAdded($event)">      
+    <app-add-recipe (newRecipe)="newRecipeAdded($event)">
     </app-add-recipe>
   </div>
   <div class="ui segment">
+    <div>
+      <input type="text" placeholder="filter recipe..." #filter>
+      <button (click)="applyFilter(filter.value)">filter</button>
+    </div>
     <div class="ui cards">
-      <app-recipe *ngFor='let localRecipe of recipes'
-          [recipe]='localRecipe'></app-recipe>
+      <app-recipe *ngFor='let localRecipe of recipes | recipeFilter: 
+        filterRecipeName' [recipe]='localRecipe'></app-recipe>
     </div>
   </div>
 </div>

@@ -10,6 +10,7 @@ import { RecipeDataService } from './recipe-data.service';
   providers: [RecipeDataService]  
 })
 export class AppComponent {
+  public filterRecipeName: string;
   constructor(private _recipeDataService : RecipeDataService){
   }
 
@@ -19,5 +20,9 @@ export class AppComponent {
   
   newRecipeAdded(recipe) {
     this._recipeDataService.addNewRecipe(recipe);
+  }
+
+  applyFilter(filter: string){
+    this.filterRecipeName = filter;
   }
 }

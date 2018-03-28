@@ -15,7 +15,7 @@ export class RecipeDataService {
   }
 
   addNewRecipe(recipe){
-    this._recipes.push(recipe);
+    this._recipes = [...this._recipes, recipe];
   }
 
 }

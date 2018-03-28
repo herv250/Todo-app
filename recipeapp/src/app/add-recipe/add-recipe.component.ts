@@ -11,7 +11,6 @@ export class AddRecipeComponent {
   @Output() public newRecipe = new EventEmitter<Recipe>();
 
   addRecipe(newRecipeName: HTMLInputElement) : boolean {
-    console.log(newRecipeName.value);
     const recipe = new Recipe(newRecipeName.value);
     this.newRecipe.emit(recipe);
     return false;
