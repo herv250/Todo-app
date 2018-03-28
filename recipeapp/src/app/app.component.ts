@@ -1,24 +1,23 @@
 //import { Component } from '@angular/core';
 import { Recipe } from './recipe/recipe.model';
 import { Component } from '@angular/core';
+import { RecipeDataService } from './recipe-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [RecipeDataService]  
 })
 export class AppComponent {
-  private _recipes = new Array<Recipe>();
-  
-  constructor(){
-    const recipe1 = new Recipe("spaghetti");
-    const recipe2 = new Recipe("Cake");
+  constructor(private _recipeDataService : RecipeDataService){
+  }
 
-    this._recipes.push(recipe1);
-    this._recipes.push(recipe2);
+  get recipes() : Recipe[]{
+    return this._recipeDataService.recipes;
   }
   
   newRecipeAdded(recipe) {
-    this._recipes.push(recipe);
+    this._recipeDataService.addNewRecipe(recipe);
   }
 }
