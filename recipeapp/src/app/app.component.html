@@ -5,8 +5,9 @@
   </div>
   <div class="ui segment">
     <div>
-      <input type="text" placeholder="filter recipe..." #filter>
-      <button (click)="applyFilter(filter.value)">filter</button>
+      <input type="text" placeholder="filter recipe..." name="filter" 
+        (keyup)='filterRecipe$.next($event.target.value)' id="filter">
+      <!--button (click)="applyFilter(filter.value)">filter</button-->
     </div>
     <div class="ui cards">
       <app-recipe *ngFor='let localRecipe of recipes | recipeFilter: 
