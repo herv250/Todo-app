@@ -1,4 +1,3 @@
-//import { Component } from '@angular/core';
 import { Recipe } from './recipe/recipe.model';
 import { Component } from '@angular/core';
 import { RecipeDataService } from './recipe-data.service';
