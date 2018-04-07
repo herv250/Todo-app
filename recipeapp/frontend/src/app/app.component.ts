@@ -1,5 +1,5 @@
 import { Recipe } from './recipe/recipe.model';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeDataService } from './recipe-data.service';
 import { Subject } from 'rxjs/Subject';
 import { distinctUntilChanged, debounceTime, map, filter } from 'rxjs/operators'
@@ -10,9 +10,10 @@ import { distinctUntilChanged, debounceTime, map, filter } from 'rxjs/operators'
   styleUrls: ['./app.component.css'],
   providers: [RecipeDataService]  
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   public filterRecipeName: string;
   public filterRecipe$ = new Subject<string>();
+  private _recipes: Recipe[];
 
   constructor(private _recipeDataService : RecipeDataService){
     this.filterRecipe$
@@ -20,20 +21,33 @@ export class AppComponent {
       distinctUntilChanged(),
       debounceTime(400),
       map(val => val.toLocaleLowerCase()),
-      filter(val => !val.startsWith('s'))      // filters the filter
+      //filter(val => !val.startsWith('s'))      // filters the filter
     )      
     .subscribe(val => this.filterRecipeName = val);
   }
 
-  get recipes() : Recipe[]{
-    return this._recipeDataService.recipes;
-  }
-  
-  newRecipeAdded(recipe) {
-    this._recipeDataService.addNewRecipe(recipe);
+  ngOnInit(){
+      this._recipeDataService.recipes.subscribe(
+        items => this._recipes = items);
   }
 
-  /*applyFilter(filter: string){
-    this.filterRecipeName = filter;
-  }*/
+  get recipes() {
+    return this._recipes;
+  }
+  
+  
+  newRecipeAdded(recipe: Recipe) {    
+    this._recipeDataService
+      .addNewRecipe(recipe)
+      .subscribe(item => this._recipes.push(recipe));
+  }
+
+  removeRecipe(recipe: Recipe){
+    this._recipeDataService
+      .removeRecipe(recipe)
+      .subscribe(
+        item => 
+          (this._recipes = this._recipes.filter(val => item.id !== val.id))
+      )
+  }
 }
