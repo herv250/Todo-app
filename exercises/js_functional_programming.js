@@ -126,10 +126,11 @@ function exercise9() {
 
 function exercise10() {
   // return the name of the teacher of the course with the smallest id
-
-  return courses.reduce(function(acc, current){
-    return acc = ( acc == undefined || acc.id > current.id ) ? current : acc;
-  }).teacher;
+  /* return courses.reduce(function(acc, current){
+    return acc = acc.id < current.id  ? acc : current;
+  }, 0).teacher;*/
+  return courses.reduce((acc, current) => 
+    acc.id < current.id  ? acc : current, 0).teacher;
 }
 
 ///////////////////////////////////////////////////////////
