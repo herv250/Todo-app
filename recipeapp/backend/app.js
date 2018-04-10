@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 var app = express();
 var mongoose = require('mongoose');
-require('./models/Recipe')
+require('./models/Recipe');
+require('./models/Ingredients');
 
 var index = require('./routes/index');
 var users = require('./routes/users');

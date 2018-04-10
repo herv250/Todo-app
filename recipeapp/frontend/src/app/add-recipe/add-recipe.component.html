@@ -1,11 +1,19 @@
-<div class="ui large form segment clearing">
+<form [formGroup]='recipe' class="ui large form segment clearing" 
+  (ngSubmit)='onSubmit()'>
   <h3 class="ui header">Add recipe</h3>
-    <div class="field">
-      <label for="name">Name:</label>
-        <input id="name" name="name" #newrecipename>
-    </div>
-    <button (click)="addRecipe(newrecipename)" 
-              class="ui positive right floated button">
-      Add recipe
-    </button>
-</div>
+  <div class="field">
+    <label for="name">Name:</label>
+    <input id="name_id" formControlName='name' #spy>
+  </div>
+  <div *ngIf='recipe.get("name").errors?.required 
+      && recipe.get("name").touched'
+    class='ui pointing red basic label'>
+    error! this is required
+  </div>
+  <button class="ui positive right floated button" type="submit">
+    Add recipe
+  </button>
+</form>
+REMOVE {{ recipe.value | json }} {{ recipe.valid }}
+{{ spy.className }}
+{{ recipe.get("name").errors | json}}

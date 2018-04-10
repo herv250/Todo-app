@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { IngredientComponent } from './ingredient/ingredient.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeFilterPipe } from './recipe-filter.pipe';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http'
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
