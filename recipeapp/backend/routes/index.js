@@ -13,16 +13,11 @@ let Recipe = mongoose.model('Recipe');
 let Ingredient = mongoose.model('Ingredient');
 
 router.get('/API/recipes/', function (req, res, next) {
-  console.log('test1');
-  let query = Recipe.find().populate('Ingredient');
-  console.log('test1.5');
+  let query = Recipe.find().populate('ingredients');
   query.exec(function (err, recipes) {
-    console.log('test2');
     if (err) {
-      console.log('test3');
       return next(err);
     };
-    console.log('test4');
     res.json(recipes);
   });
 });
@@ -32,19 +27,17 @@ router.get('/API/recipe/:recipe', function (req, res) {
 })
 
 router.post('/API/recipes/', function (req, res, next) {
-  console.log("test0", req.body.ingredients);
   Ingredient.create(req.body.ingredients, function (err, ings) {
+    
     if (err) {
       return next(err);
     }
-
     let recipe = new Recipe({
       name: req.body.name,
       created: req.body.created
     });
 
     recipe.ingredients = ings;
-    console.log("test2", recipe);
     recipe.save(function (err, post) {
       if (err) {
         Ingredient.remove({ _id: { $in: recipe.ingredients } });
@@ -78,7 +71,6 @@ router.post('/API/recipe/:recipe/ingredients',
 
 
 router.param('recipe', function (req, res, next, id) {
-  console.log('test00');
   let query = Recipe.findById(id);
   query.exec(function (err, recipe) {
     if (err) {

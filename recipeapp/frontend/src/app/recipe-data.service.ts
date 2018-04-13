@@ -3,6 +3,7 @@ import { Recipe } from './recipe/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { Ingredient } from './ingredient/ingredient.model';
 
 @Injectable()
 export class RecipeDataService {
@@ -36,6 +37,11 @@ export class RecipeDataService {
             .pipe(map(Recipe.fromJSON));
   }
 
-
+  addIngredientToRecipe(ing: Ingredient, rec: Recipe):   
+    Observable<Ingredient> {
+      const theUrl = `${this._appUrl}recipe/${rec.id}/ingredients`;
+      return this.http.post(theUrl, ing)
+        .pipe(map(Ingredient.fromJSON));
+    }
 
 }

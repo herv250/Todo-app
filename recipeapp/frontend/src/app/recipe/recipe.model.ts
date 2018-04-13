@@ -1,15 +1,17 @@
+import { Ingredient, UnitType } from "../ingredient/ingredient.model";
+
 export class Recipe {
   private _id: string;
   private _name: string;
   private _dateAdded: Date = new Date();
-  private _ingredients = new Array<string>();
+  private _ingredients: Ingredient[];
 
   constructor(name: string,
-    ingredients: string[] = [],
+    ingredients: Ingredient[] = [],
     dateAdded: Date = null
   ) {
     this._name = name;
-    this._ingredients = ingredients;
+    this._ingredients = ingredients || new Array();
     this._dateAdded = dateAdded ? dateAdded : new Date();
    }
   
@@ -21,16 +23,16 @@ export class Recipe {
       return this._name;
   }
 
-  get dateAdded(){
+  get dateAdded() : Date{
     return this._dateAdded;
   }
 
-  get ingredients(){
+  get ingredients() : Ingredient[]{
     return this._ingredients;
   }
 
-  addIngredient(name: string, amount?: number, unit?: string){
-    this._ingredients.push(`${amount || 1} ${unit || ""} ${name}`)
+  addIngredient(ing: Ingredient){
+    this._ingredients.push(ing);
   }
 
   toJSON(){

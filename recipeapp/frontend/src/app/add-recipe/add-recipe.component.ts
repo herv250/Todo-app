@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Recipe } from '../recipe/recipe.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Ingredient } from '../ingredient/ingredient.model';
 
 @Component({
   selector: 'app-add-recipe',
@@ -20,14 +21,32 @@ export class AddRecipeComponent implements OnInit {
     return false;
   }*/
   
+public readonly unitTypes = ['', 'Liter', 'Gram', 'Tbsp'];
+
   ngOnInit(){
     this.recipe = this.fb.group({
-      name: ['risotto']
-      //[Validators.required, Validators.minLength(2)]),
-    })
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      ingredients: this.fb.array([ this.createIngredients() ])
+    });
   }
 
   onSubmit(){
-    this.newRecipe.emit(new Recipe(this.recipe.value.name));
+    const recipe = new Recipe(this.recipe.value.name);
+    for(const ing of this.recipe.value.ingredients){
+      if(ing.ingredientname.length > 2) {
+        recipe.addIngredient(new Ingredient(ing.ingredientname,
+          ing.amount, ing.unit ));
+      }
+    }
+    this.newRecipe.emit(recipe);
+  }
+
+  createIngredients(): FormGroup {
+    return this.fb.group({
+      amount: [''],
+      unit: [''],
+      ingredientname: ['', [Validators.required,
+        Validators.minLength(3)]]
+    })
   }
 }

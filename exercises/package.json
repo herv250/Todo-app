@@ -9,5 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.7.4"
   }
 }
