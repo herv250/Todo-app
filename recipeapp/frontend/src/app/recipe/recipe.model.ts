@@ -1,4 +1,4 @@
-import { Ingredient, UnitType } from "../ingredient/ingredient.model";
+import { Ingredient, UnitType } from "./ingredient/ingredient.model";
 
 export class Recipe {
   private _id: string;

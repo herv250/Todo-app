@@ -1,13 +1,23 @@
 <div class="ui container">
+  <div class="ui two item menu">
+    <a class="item" routerLinkActive='active'
+      routerLink="/recipe-list">Recipes</a>
+    <a class='item' routerLinkActive='active'
+      routerLink="/add-recipe">Add Recipe</a>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+<!--div class="ui container">
   <div class="ui basic segment">
     <app-add-recipe (newRecipe)="newRecipeAdded($event)">
     </app-add-recipe>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div class="ui segment">
     <div class="ui basic segment input">
       <input type="text" placeholder="filter recipe..." name="filter" (keyup)='filterRecipe$.next($event.target.value)' id="filter">
       <!--button (click)="applyFilter(filter.value)">filter</button-->
-    </div>
+    <!--/div>
     <div class="ui center">
       <div class="ui cards">
         <app-recipe *ngFor='let localRecipe of recipes | 
@@ -15,4 +25,4 @@
       </div>
     </div>
   </div>
-</div>
+</div-->

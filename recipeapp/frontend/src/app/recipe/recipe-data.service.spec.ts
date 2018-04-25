@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { RecipeDataService } from './recipe-data.service';
+import { RecipeDataService } from '../recipe-data.service';
 
 describe('RecipeDataService', () => {
   beforeEach(() => {

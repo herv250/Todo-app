@@ -1,4 +1,4 @@
-import { Recipe } from './recipe.model';
+import { Recipe } from '../recipe.model';
 import { Input, OnInit, Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
