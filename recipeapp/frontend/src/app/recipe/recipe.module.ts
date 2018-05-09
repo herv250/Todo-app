@@ -10,10 +10,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RecipeDataService } from './recipe-data.service';
 import { RouterModule } from '@angular/router';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { RecipeResolver } from './recipe-resolver';
 
 const routes = [
-  { path: 'recipe-list', component: RecipeListComponent },
-  { path: 'add-recipe', component: AddRecipeComponent }
+  { path: 'list', component: RecipeListComponent },
+  { path: 'recipe', component: AddRecipeComponent },
+  { path: ':id', component: RecipeDetailComponent,
+    resolve: { recipe: RecipeResolver } }
 ]
 
 @NgModule({
@@ -31,6 +34,7 @@ const routes = [
     RecipeListComponent,
     RecipeDetailComponent
   ],
-  providers: [ RecipeDataService ]
+  providers: [ RecipeDataService,
+  RecipeResolver ]
 })
 export class RecipeModule { }

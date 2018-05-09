@@ -8,13 +8,11 @@ import { RecipeModule } from './recipe/recipe.module';
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
-    RecipeModule,
-    AppRoutingModule
-    
+    AppRoutingModule    
   ],
   bootstrap: [AppComponent]
 })
