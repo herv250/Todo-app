@@ -1,16 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let passport = require('passport');
 
-var app = express();
-var mongoose = require('mongoose');
+
+let app = express();
+let mongoose = require('mongoose');
+require('./models/User');
 require('./models/Recipe');
 require('./models/Ingredients');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+require('./config/passport');
+
+let index = require('./routes/index');
+let users = require('./routes/users');
 
 
 mongoose.connect('mongodb://localhost/recipedb');
@@ -21,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', index);
 app.use('/users', users);
@@ -38,7 +44,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;

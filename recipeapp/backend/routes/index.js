@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
+let express = require('express');
+let router = express.Router();
+let jwt = require('express-jwt');
+let auth = jwt({ secret: process.env.RECIPE_BACKEND_SECRET });
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.send(res.recipes);
@@ -26,7 +27,7 @@ router.get('/API/recipe/:recipe', function (req, res) {
   res.json(req.recipe);
 })
 
-router.post('/API/recipes/', function (req, res, next) {
+router.post('/API/recipes/', auth, function (req, res, next) {
   Ingredient.create(req.body.ingredients, function (err, ings) {
     
     if (err) {
@@ -49,7 +50,7 @@ router.post('/API/recipes/', function (req, res, next) {
 });
 
 
-router.post('/API/recipe/:recipe/ingredients',
+router.post('/API/recipe/:recipe/ingredients', auth,
   function (req, res, next) {
     let ing = new Ingredient(req.body);
 
@@ -84,7 +85,7 @@ router.param('recipe', function (req, res, next, id) {
   });
 });
 
-router.delete('/API/recipe/:recipe', function (req, res, next) {
+router.delete('/API/recipe/:recipe', auth, function (req, res, next) {
   Ingredient.remove({ _id: { $in: req.recipe.ingredients } },
     function (err) {
       if (err) {
@@ -100,7 +101,7 @@ router.delete('/API/recipe/:recipe', function (req, res, next) {
   )
 });
 
-router.put('/API/recipe/:recipe', function (req, res, next) {
+router.put('/API/recipe/:recipe', auth, function (req, res, next) {
   req.recipe.save(function (err) {
     if (err) {
       return next(err);
