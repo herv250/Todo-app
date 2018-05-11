@@ -14,7 +14,7 @@ import { RecipeResolver } from './recipe-resolver';
 
 const routes = [
   { path: 'list', component: RecipeListComponent },
-  { path: 'recipe', component: AddRecipeComponent },
+  { path: 'add', component: AddRecipeComponent },
   { path: ':id', component: RecipeDetailComponent,
     resolve: { recipe: RecipeResolver } }
 ]

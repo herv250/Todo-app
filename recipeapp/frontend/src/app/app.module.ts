@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RecipeModule } from './recipe/recipe.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { RecipeModule } from './recipe/recipe.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule    
+    UserModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

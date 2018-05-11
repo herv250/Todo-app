@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
 var RecipeSchema = new mongoose.Schema({
     name: String,
