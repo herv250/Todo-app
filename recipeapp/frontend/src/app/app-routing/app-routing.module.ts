@@ -6,11 +6,13 @@ import { AddRecipeComponent } from '../recipe/add-recipe/add-recipe.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { RecipeModule } from '../recipe/recipe.module';
 import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
+import { AuthGuardService } from '../user/auth-guard.service';
 
 
 const appRoutes: Routes = [
   {
     path: 'recipe',
+    canActivate: [ AuthGuardService ],
     loadChildren: 'app/recipe/recipe.module#RecipeModule',
     data: { preload: true }
   },

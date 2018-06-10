@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -19,7 +20,7 @@ const routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, LogoutComponent],
   providers: [AuthenticationService
   ]
 })

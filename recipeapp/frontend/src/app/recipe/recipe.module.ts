@@ -11,6 +11,7 @@ import { RecipeDataService } from './recipe-data.service';
 import { RouterModule } from '@angular/router';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeResolver } from './recipe-resolver';
+import { httpInterceptorProviders } from '../http-interceptors/index';
 
 const routes = [
   { path: 'list', component: RecipeListComponent },
@@ -34,7 +35,7 @@ const routes = [
     RecipeListComponent,
     RecipeDetailComponent
   ],
-  providers: [ RecipeDataService,
+  providers: [ httpInterceptorProviders, RecipeDataService,
   RecipeResolver ]
 })
 export class RecipeModule { }

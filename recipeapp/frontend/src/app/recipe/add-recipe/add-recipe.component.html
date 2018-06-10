@@ -4,8 +4,9 @@
     <label for="name">Name:</label>
     <input id="name_id" formControlName='name' #spy>
   </div>
-  <div formArrayName='ingredients' *ngFor='let item of recipe.get("ingredients").controls;
-            let i = index' class="ui form segment">
+  <div formArrayName='ingredients' 
+    *ngFor='let item of recipe.get("ingredients").controls;
+     let i = index' class="ui form segment">
     <div [formGroupName]='i'>
       <h4 for="ingredient_block">Ingredient:</h4>
       <div>
@@ -18,8 +19,8 @@
           <input type="text" id="ingredient_amount" formControlName='amount'>
         </div>
         <div class="field">
-          <label for="ingredient_unittye">Unit:</label>
-          <select id="ingredient_unittye" formControlName="unit">
+          <label for="ingredient_unittype">Unit:</label>
+          <select id="ingredient_unittype" formControlName="unit">
             <option *ngFor='let type of unitTypes' [value]="type">
               {{type}}
             </option>

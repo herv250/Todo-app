@@ -1,5 +1,8 @@
 let express = require('express');
 let router = express.Router();
+let mongoose = require('mongoose');
+let User = mongoose.model('User');
+let passport = require('passport');
 
 
 router.post('/register', function(req, res, next){
@@ -7,6 +10,7 @@ router.post('/register', function(req, res, next){
     return res.status(400).json(
       {message: 'Please fill out all fields'});
   }
+  
   let user = new User();
   user.username = req.body.username;
   user.setPassword(req.body.passord);
@@ -37,11 +41,11 @@ router.post('/login', function(req, res, next){
 
 router.post('/checkusername', function(req, res, next){
   User.find({username: req.body.username},
-  function(err, result){
+  function(err, result){    
     if(result.length){
       res.json({'username': 'alreadyexists'});
     } else {
-      rs.json({'username': 'ok'})
+      res.json({'username': 'ok'})
     }
   });
 })

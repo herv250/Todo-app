@@ -18,7 +18,7 @@ export class AddRecipeComponent implements OnInit {
   public errorMsg: string;
 
   constructor(private fb: FormBuilder, private _recipeDataService: RecipeDataService) {
-    
+
   }
 
   /*addRecipe(newRecipeName: HTMLInputElement) : boolean {
@@ -26,40 +26,40 @@ export class AddRecipeComponent implements OnInit {
     this.newRecipe.emit(recipe);
     return false;
   }*/
-  
-public readonly unitTypes = ['', 'Liter', 'Gram', 'Tbsp'];
 
-  ngOnInit(){
+  public readonly unitTypes = ['', 'Liter', 'Gram', 'Tbsp'];
+
+  ngOnInit() {
     this.recipe = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      ingredients: this.fb.array([ this.createIngredients() ])
+      ingredients: this.fb.array([this.createIngredients()])
     });
 
     this.ingredients.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(ingList => {
         const lastElement = ingList[ingList.length - 1];
-        if (lastElement.ingredientname && 
+        if (lastElement.ingredientname &&
           lastElement.ingredientname.length > 2) {
-            this.ingredients.push(this.createIngredients());
-          }
-          /*if(lastElement.ingredientname == undefined || lastElement.ingredientname.length == 0){
-            this.ingredients.removeAt(ingList.length - 1);
-          }*/
+          this.ingredients.push(this.createIngredients());
+        }
+        /*if(lastElement.ingredientname == undefined || lastElement.ingredientname.length == 0){
+          this.ingredients.removeAt(ingList.length - 1);
+        }*/
       });
   }
 
-  onSubmit(){
+  onSubmit() {
     const recipe = new Recipe(this.recipe.value.name);
-    for(const ing of this.recipe.value.ingredients){
-      if(ing.ingredientname.length > 2) {
+    for (const ing of this.recipe.value.ingredients) {
+      if (ing.ingredientname.length > 2) {
         recipe.addIngredient(new Ingredient(ing.ingredientname,
-          ing.amount, ing.unit ));
+          ing.amount, ing.unit));
       }
     }
     this.newRecipe.emit(recipe);
     this._recipeDataService.addNewRecipe(recipe).subscribe(
-      () => {},
+      () => { },
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} while adding
           recipe for ${recipe.name}: ${error.error}`;
@@ -72,7 +72,7 @@ public readonly unitTypes = ['', 'Liter', 'Gram', 'Tbsp'];
       amount: [''],
       unit: [''],
       ingredientname: ['', [Validators.required,
-        Validators.minLength(3)]]
+      Validators.minLength(3)]]
     })
   }
 
