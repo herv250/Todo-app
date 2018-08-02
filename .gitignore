@@ -2,5 +2,4 @@
 *.history/
 
 # dependencies
-*/node_modules
-/wishlistapp/frontend/node_modules
+node_modules
