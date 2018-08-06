@@ -39,7 +39,4 @@ testem.log
 Thumbs.db
 
 # local history
-*.history/
-
-# dependencies
-node_modules
+.history/
