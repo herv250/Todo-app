@@ -3,7 +3,7 @@ let router = express.Router();
 let jwt = require('express-jwt');
 let auth = jwt({ secret: process.env.RECIPE_BACKEND_SECRET });
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
   res.send(res.recipes);
 });
 
@@ -13,23 +13,22 @@ let mongoose = require('mongoose');
 let Recipe = mongoose.model('Recipe');
 let Ingredient = mongoose.model('Ingredient');
 
-router.get('/API/recipes/', function (req, res, next) {
+router.get('/API/recipes/', function(req, res, next) {
   let query = Recipe.find().populate('ingredients');
-  query.exec(function (err, recipes) {
+  query.exec(function(err, recipes) {
     if (err) {
       return next(err);
-    };
+    }
     res.json(recipes);
   });
 });
 
-router.get('/API/recipe/:recipe', function (req, res) {
+router.get('/API/recipe/:recipe', function(req, res) {
   res.json(req.recipe);
-})
+});
 
-router.post('/API/recipes/', auth, function (req, res, next) {
-  Ingredient.create(req.body.ingredients, function (err, ings) {
-    
+router.post('/API/recipes/' /*, auth,*/, function(req, res, next) {
+  Ingredient.create(req.body.ingredients, function(err, ings) {
     if (err) {
       return next(err);
     }
@@ -39,41 +38,41 @@ router.post('/API/recipes/', auth, function (req, res, next) {
     });
 
     recipe.ingredients = ings;
-    recipe.save(function (err, post) {
+    recipe.save(function(err, post) {
       if (err) {
         Ingredient.remove({ _id: { $in: recipe.ingredients } });
         return next(err);
-      };
+      }
       res.json(recipe);
     });
   });
 });
 
+router.post('/API/recipe/:recipe/ingredients' /*auth,*/, function(
+  req,
+  res,
+  next
+) {
+  let ing = new Ingredient(req.body);
 
-router.post('/API/recipe/:recipe/ingredients', auth,
-  function (req, res, next) {
-    let ing = new Ingredient(req.body);
-
-    ing.save(function (err, ingredient) {
+  ing.save(function(err, ingredient) {
+    if (err) {
+      return next(err);
+    }
+    req.recipe.ingredients.push(ingredient);
+    req.recipe.save(function(err, rec) {
       if (err) {
+        Ingredient.remove({ _id: { $in: req.recipe.ingredients[ingredient] } });
         return next(err);
       }
-      req.recipe.ingredients.push(ingredient);
-      req.recipe.save(function (err, rec) {
-        if (err) {
-          Ingredient.remove({ _id: { $in: req.recipe.ingredients[ingredient] } });
-          return next(err);
-        }
-        res.json(ingredient);
-      })
-    })
-  }
-)
+      res.json(ingredient);
+    });
+  });
+});
 
-
-router.param('recipe', function (req, res, next, id) {
+router.param('recipe', function(req, res, next, id) {
   let query = Recipe.findById(id);
-  query.exec(function (err, recipe) {
+  query.exec(function(err, recipe) {
     if (err) {
       return next(err);
     }
@@ -85,27 +84,28 @@ router.param('recipe', function (req, res, next, id) {
   });
 });
 
-router.delete('/API/recipe/:recipe', auth, function (req, res, next) {
-  Ingredient.remove({ _id: { $in: req.recipe.ingredients } },
-    function (err) {
+router.delete(
+  '/API/recipe/:recipe',
+  /*auth,*/ function(req, res, next) {
+    Ingredient.remove({ _id: { $in: req.recipe.ingredients } }, function(err) {
       if (err) {
         return next(err);
       }
-      req.recipe.remove(function (err) {
+      req.recipe.remove(function(err) {
         if (err) {
           return next(err);
         }
         res.json(req.recipe);
-      })
-    }
-  )
-});
+      });
+    });
+  }
+);
 
-router.put('/API/recipe/:recipe', auth, function (req, res, next) {
-  req.recipe.save(function (err) {
+router.put('/API/recipe/:recipe', auth, function(req, res, next) {
+  req.recipe.save(function(err) {
     if (err) {
       return next(err);
     }
-    res.json("updated recipe");
-  })
+    res.json('updated recipe');
+  });
 });

@@ -12,7 +12,7 @@ import { AuthGuardService } from '../user/auth-guard.service';
 const appRoutes: Routes = [
   {
     path: 'recipe',
-    canActivate: [ AuthGuardService ],
+    //canActivate: [ AuthGuardService ],
     loadChildren: 'app/recipe/recipe.module#RecipeModule',
     data: { preload: true }
   },
