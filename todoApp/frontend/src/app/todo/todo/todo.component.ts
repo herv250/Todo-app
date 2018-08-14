@@ -8,20 +8,18 @@ import { Todo } from '../todo.model';
 })
 export class TodoComponent implements OnInit {
   @Input() public todo: Todo
-
+  state: boolean = false;
   constructor() {
     //this.title = "Webapps taak";
+    
    }
 
   ngOnInit() {
+    this.state = this.todo.isDone;
   }
 
   get title(){
     return this.todo.title;
-  }
-
-  get isDone(){
-  return this.todo.isDone;
   }
 
 }

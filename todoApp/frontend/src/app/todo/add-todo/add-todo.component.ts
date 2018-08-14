@@ -9,11 +9,12 @@ import { TodoList } from '../todo-list.model';
 export class AddTodoComponent {
   @Output() 
   public newTodoList = new EventEmitter<TodoList>();
- 
+  private addFieldValue: string;
  
   addTodoList(newTodoTitle: HTMLInputElement) : boolean {
     const todoList = new TodoList(newTodoTitle.value);
     this.newTodoList.emit(todoList);
+    this.addFieldValue = '';
     return false;
   }
 

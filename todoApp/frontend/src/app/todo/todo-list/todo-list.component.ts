@@ -10,17 +10,20 @@ import { Todo } from '../todo.model';
 })
 export class TodoListComponent implements OnInit {
   @Input() public todoList: TodoList
+  private addFieldValue: string;
 
   constructor(private _todoDataService: TodoDataService) {
     //this.title = "Webapps taak";
    }
 
   ngOnInit() {
+    this.addFieldValue = '';
   }
 
   addTodo(todoTitle: HTMLInputElement){
     this._todoDataService
       .addTodo(this.todoList.title, new Todo(todoTitle.value));
+      this.addFieldValue = '';
   }
 
   get todos(){    
