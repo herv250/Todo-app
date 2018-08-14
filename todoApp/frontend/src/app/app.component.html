@@ -6,12 +6,13 @@
   <div class="ui segment">
     <div class="ui basic segment input">
       <input type="text" placeholder="filter todo..." name="filter" 
-        (keyup)='filterTodo$.next($event.target.value)' id="filter">
+        (keyup)='filterTodoList$.next($event.target.value)' id="filter">
       <!--button (click)="applyFilter(filter.value)">filter</button-->
     </div>
     <div class="ui cards">
-      <app-todo *ngFor='let localTodo of todos | todoFilter: 
-        filterTodoTitle' [todo]='localTodo'></app-todo>
+      <app-todo-list *ngFor='let todoList of todoLists | todoFilter: 
+        filterTodoListTitle' [todoList]='todoList'>
+      </app-todo-list>
     </div>
   </div>
 </div>

@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Todo } from './todo/todo/todo.model';
+import { TodoList,  } from './todo/todo-list.model';
+import { Todo } from './todo/todo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoDataService {
-  private _todos = new Array<Todo>();
+  private _todoLists = new Array<TodoList>();
 
   constructor() { 
-    const todo1 = new Todo("Webapps taak");
-    todo1.addTodoItem('taak1');
-    this._todos.push(todo1);
+    const todoListTemplate = new TodoList("Webapps taak");
+    todoListTemplate.addTodo(new Todo('taak 1', true));
+    todoListTemplate.addTodo(new Todo('slapen'));
+    this._todoLists.push(todoListTemplate);
   }
 
-  get todos() : Todo[] {
-    return this._todos;
+  get todoLists() : TodoList[] {
+    return this._todoLists;
   }
 
-  addTodoList(todo){
-    this._todos = [...this._todos, todo];
+  addTodoList(todoList){
+    this._todoLists = [...this._todoLists, todoList];
   }
 
-  addTodo(todoListTitle: string, newTodo: string){
-    this._todos
+  addTodo(todoListTitle: string, newTodo: Todo){
+    this._todoLists
       .find(todoList => todoList.title == todoListTitle)
-      .addTodoItem(newTodo);
+      .addTodo(newTodo);
   }  
 
 

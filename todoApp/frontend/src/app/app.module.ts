@@ -4,21 +4,21 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoComponent } from './todo/todo/todo.component';
-import { TodoItemComponent } from './todo/todo-item/todo-item.component';
 import { AddTodoComponent } from './todo/add-todo/add-todo.component';
 import { TodoFilterPipe } from './todo-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     TodoComponent,
-    TodoItemComponent,
     AddTodoComponent,
     TodoFilterPipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

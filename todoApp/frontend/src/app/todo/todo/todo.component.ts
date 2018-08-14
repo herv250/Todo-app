@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Todo } from './todo.model';
-import { TodoDataService } from '../../todo-data.service';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-todo',
@@ -10,20 +9,19 @@ import { TodoDataService } from '../../todo-data.service';
 export class TodoComponent implements OnInit {
   @Input() public todo: Todo
 
-  constructor(private _todoDataService: TodoDataService) {
+  constructor() {
     //this.title = "Webapps taak";
    }
 
   ngOnInit() {
   }
 
-  addTodoItem(todoTitle: HTMLInputElement){
-    console.log('new item', todoTitle);
-    this._todoDataService.addTodo(this.todo.title, todoTitle.value);
+  get title(){
+    return this.todo.title;
   }
 
-  get todoItems(){    
-    return this.todo.todoItems;
+  get isDone(){
+  return this.todo.isDone;
   }
 
 }

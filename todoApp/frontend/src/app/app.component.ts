@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TodoDataService } from './todo-data.service';
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Todo } from './todo/todo/todo.model';
+import { TodoList } from './todo/todo-list.model';
 
 @Component({
   selector: 'app-root',
@@ -12,25 +12,25 @@ import { Todo } from './todo/todo/todo.model';
 })
 
 export class AppComponent {
-  public filterTodoTitle: string;
-  public filterTodo$ = new Subject<string>();
+  public filterTodoListTitle: string;
+  public filterTodoList$ = new Subject<string>();
 
   constructor(private _todoDataService : TodoDataService) {
-    this.filterTodo$
+    this.filterTodoList$
       .pipe(
         distinctUntilChanged(),
         debounceTime(400),
         map(val => val.toLowerCase())
       )
-      .subscribe(val => this.filterTodoTitle = val);
+      .subscribe(val => this.filterTodoListTitle = val);
   }
 
-  get todos() : Todo[] {
-    return this._todoDataService.todos;
+  get todoLists() : TodoList[] {
+    return this._todoDataService.todoLists;
   }
 
-  addTodoList(todo){
-    this._todoDataService.addTodoList(todo);
+  addTodoList(todoList){
+    this._todoDataService.addTodoList(todoList);
   }
 
 

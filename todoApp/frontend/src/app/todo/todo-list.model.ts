@@ -1,15 +1,17 @@
-export class Todo {
+import { Todo } from "./todo.model";
+
+export class TodoList {
     private _title: string;
     private _done: boolean;
-    private _todoItems = new Array<string>();
+    private _todos = new Array<Todo>();
     private _dateAdded: Date = new Date();
 
     constructor(title: string){
         this._title = title;
     }
 
-    addTodoItem(itemTitle: string){
-        this._todoItems.push(itemTitle);
+    addTodo(todo: Todo){
+        this._todos.push(todo);
     }
 
     get title() : string {
@@ -24,7 +26,7 @@ export class Todo {
         return this._dateAdded;
     }
 
-    get todoItems(){
-        return this._todoItems;
+    get todos(){
+        return this._todos;
     }
 }

@@ -1,3 +1,29 @@
-<p>
-  todo-list works!
-</p>
+<div class="ui basic segment">
+    <div class="ui card">
+      <div class="content">
+        <a class="header">{{ todoList.title }}</a>
+        <div class="meta">
+          <span class="date">added on {{ todoList.dateAdded | date }}</span>
+        </div>
+        <ul class="ui list">
+          <div *ngFor="let todo of todos" class="item">
+            <app-todo [todo]="todo"></app-todo>
+          </div>        
+        </ul>
+        <div class="ui form">
+          <div class="field">
+            <input type="text" placeholder="add todo..." 
+              name="todoTitle" #newtodo class=" left attached"
+            />
+            <button (click)="addTodo(newtodo)" class="ui right attached button">
+              Add
+            </button>
+          </div>
+          
+        </div>
+        <!--button class="ui icon button" (click)="removeTodo()">
+          <i class="trash outline icon"></i>
+        </button-->
+      </div>
+    </div>
+  </div>
