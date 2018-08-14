@@ -2,31 +2,37 @@ import { Todo } from "./todo.model";
 
 export class TodoList {
     private _title: string;
-    private _done: boolean;
+    private _state: boolean;
     private _todos = new Array<Todo>();
-    private _dateAdded: Date = new Date();
+    private _dateLastChange: Date;
 
     constructor(title: string){
         this._title = title;
+        this._dateLastChange = new Date();
     }
 
     addTodo(todo: Todo){
-        this._todos.push(todo);
+        this._todos.push(todo);        
+        this.updateLastChangeDate();
     }
 
     get title() : string {
         return this._title;
     }
 
-    get isDone() : boolean {
-        return this._done;
+    /*get state() : boolean {
+        return this._state;
+    }*/
+
+    get dateLastChange() : Date {
+        return this._dateLastChange;
     }
 
-    get dateAdded() : Date {
-        return this._dateAdded;
-    }
-
-    get todos(){
+    get todos() : Array<Todo>{
         return this._todos;
+    }
+
+    private updateLastChangeDate() {
+        this._dateLastChange = new Date();
     }
 }

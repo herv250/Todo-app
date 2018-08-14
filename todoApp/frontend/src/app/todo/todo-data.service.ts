@@ -23,11 +23,15 @@ export class TodoDataService {
     this._todoLists = [...this._todoLists, todoList];
   }
 
-  addTodo(todoListTitle: string, newTodo: Todo){
-    this._todoLists
-      .find(todoList => todoList.title == todoListTitle)
-      .addTodo(newTodo);
-  }  
-
+  addTodo(todoListTitle: string, todoTitle: string){
+    if(todoTitle && todoTitle.length > 0){
+    const todoList = this._todoLists
+      .find(todoList => todoList.title == todoListTitle);
+    if(!todoList.todos.some(todo => todo.title == todoTitle)){
+      todoList.addTodo(new Todo(todoTitle));
+    }
+  }
+    
+  }
 
 }

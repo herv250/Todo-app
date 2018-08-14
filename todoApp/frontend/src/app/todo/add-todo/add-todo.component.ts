@@ -10,12 +10,14 @@ export class AddTodoComponent {
   @Output() 
   public newTodoList = new EventEmitter<TodoList>();
   private addFieldValue: string;
- 
-  addTodoList(newTodoTitle: HTMLInputElement) : boolean {
-    const todoList = new TodoList(newTodoTitle.value);
-    this.newTodoList.emit(todoList);
-    this.addFieldValue = '';
+
+  addTodoList(newTodoTitle: HTMLInputElement): boolean {
+    const title = newTodoTitle.value;
+    if (title && title.length > 0) {
+      const todoList = new TodoList(title);
+      this.newTodoList.emit(todoList);
+      this.addFieldValue = '';
+    }
     return false;
   }
-
 }

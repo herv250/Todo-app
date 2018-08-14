@@ -1,10 +1,10 @@
 export class Todo {
     private _title: string;
-    private _done: boolean;
+    private _state: boolean;
 
-    constructor(title: string, done: boolean = false){
+    constructor(title: string, state: boolean = false){
         this._title = title;
-        this._done = done;
+        this._state = state;
     }
 
     get title() : string {
@@ -12,14 +12,10 @@ export class Todo {
     }
 
     get isDone() : boolean {
-        return this._done;
+        return this._state;
     }
 
-    done(){
-        this._done = true;
-    }
-
-    toggleIsDone(){
-        this._done = !this._done;
+    toggleState(){
+        this._state = !this._state;
     }
 }
