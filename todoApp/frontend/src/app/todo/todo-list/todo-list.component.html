@@ -3,20 +3,20 @@
       <div class="content">
         <a class="header center aligned">{{ todoList.title }}</a>
         <div class="ui divider"></div>
+        <div class="meta">
+            <span class="date">last edited on {{ todoList.dateLastChange | date }}</span>
+        </div>
         <ul class="ui list compact">
           <div *ngFor="let todo of todos" 
-            class="item clearing dont-break-out"
-          >
+            class="item clearing dont-break-out">
             <app-todo [todo]="todo"></app-todo>
           </div>        
         </ul>
         <div class="ui form">
           <div class="ui mini input">
             <input type="text" placeholder="add todo..." 
-              name="todoTitle" #newtodo 
-              class="left attached"
-              [(ngModel)]="addFieldValue"
-              (keyup.enter)="addTodo(newtodo)"
+              name="todoTitle" #newtodo class="left attached"
+              [(ngModel)]="addFieldValue" (keyup.enter)="addTodo(newtodo)"
             />
             <button (click)="addTodo(newtodo)" 
             class="ui right attached icon button small">

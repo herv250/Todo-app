@@ -17,12 +17,11 @@ export class TodoListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.addFieldValue = '';
   }
 
   addTodo(todoTitle: HTMLInputElement){
     this._todoDataService
-      .addTodo(this.todoList.title, new Todo(todoTitle.value));
+      .addTodo(this.todoList.title, todoTitle.value);
       this.addFieldValue = '';
   }
 
