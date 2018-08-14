@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TodoList } from './todo/todo-list.model';
+import { TodoList } from './todo-list.model';
 
 @Pipe({
   name: 'todoFilter'
