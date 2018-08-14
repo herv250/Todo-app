@@ -7,6 +7,7 @@ import { TodoComponent } from './todo/todo/todo.component';
 import { AddTodoComponent } from './todo/add-todo/add-todo.component';
 import { TodoFilterPipe } from './todo/todo-filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { TodoSortPipe } from './todo/todo-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     TodoComponent,
     AddTodoComponent,
     TodoFilterPipe,
+    TodoSortPipe,
   ],
   imports: [
     BrowserModule,

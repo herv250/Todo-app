@@ -9,9 +9,10 @@
         (keyup)='filterTodoList$.next($event.target.value)' id="filter">
       <!--button (click)="applyFilter(filter.value)">filter</button-->
     </div>
-    <div class="ui cards">
-      <app-todo-list *ngFor='let todoList of todoLists | todoFilter: 
-        filterTodoListTitle' [todoList]='todoList'>
+    <div class="ui cards equal width">
+      <app-todo-list *ngFor='let todoList of todoLists | todoSort | todoFilter: 
+        filterTodoListTitle '        
+        [todoList]='todoList'>
       </app-todo-list>
     </div>
   </div>
