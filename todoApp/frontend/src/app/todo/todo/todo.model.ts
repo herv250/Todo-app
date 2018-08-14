@@ -9,7 +9,7 @@ export class Todo {
     }
 
     addTodoItem(itemTitle: string){
-        this._todoItems.push(`${itemTitle} ${false}`);
+        this._todoItems.push(itemTitle);
     }
 
     get title() : string {
@@ -22,5 +22,9 @@ export class Todo {
 
     get dateAdded() : Date {
         return this._dateAdded;
+    }
+
+    get todoItems(){
+        return this._todoItems;
     }
 }

@@ -29,8 +29,8 @@ export class AppComponent {
     return this._todoDataService.todos;
   }
 
-  newTodoAdded(todo){
-    this._todoDataService.addNewTodo(todo);
+  addTodoList(todo){
+    this._todoDataService.addTodoList(todo);
   }
 
 

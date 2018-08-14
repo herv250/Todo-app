@@ -9,6 +9,7 @@ export class TodoDataService {
 
   constructor() { 
     const todo1 = new Todo("Webapps taak");
+    todo1.addTodoItem('taak1');
     this._todos.push(todo1);
   }
 
@@ -16,7 +17,15 @@ export class TodoDataService {
     return this._todos;
   }
 
-  addNewTodo(todo){
+  addTodoList(todo){
     this._todos = [...this._todos, todo];
   }
+
+  addTodo(todoListTitle: string, newTodo: string){
+    this._todos
+      .find(todoList => todoList.title == todoListTitle)
+      .addTodoItem(newTodo);
+  }  
+
+
 }

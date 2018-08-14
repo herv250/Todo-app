@@ -6,13 +6,22 @@
         <span class="date">added on {{ todo.dateAdded | date }}</span>
       </div>
       <ul class="ui list">
-        <li *ngFor="let todoItem of todoItems">
+        <div *ngFor="let todoItem of todoItems" class="item">
           <app-todo-item [title]="todoItem"></app-todo-item>
-        </li>
+        </div>        
       </ul>
+      <div class="ui form">
+        <div class="field">
+          <input type="text" placeholder="add todo..." name="todoTitle" #newtodoitem class=" left attached">
+          <button (click)="addTodoItem(newtodoitem)" class="ui right attached button">
+            Add
+          </button>
+        </div>
+        
+      </div>
       <!--button class="ui icon button" (click)="removeTodo()">
         <i class="trash outline icon"></i>
       </button-->
     </div>
   </div>
-</div> 
+</div>

@@ -8,12 +8,12 @@ import { Todo } from '../todo/todo.model';
 })
 export class AddTodoComponent {
   @Output() 
-  public newTodo = new EventEmitter<Todo>();
+  public newTodoList = new EventEmitter<Todo>();
  
  
-  addTodo(newTodoTitle: HTMLInputElement) : boolean {
-    const todo = new Todo(newTodoTitle.value);
-    this.newTodo.emit(todo);
+  addTodoList(newTodoTitle: HTMLInputElement) : boolean {
+    const todoList = new Todo(newTodoTitle.value);
+    this.newTodoList.emit(todoList);
     return false;
   }
 
