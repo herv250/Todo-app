@@ -1,0 +1,16 @@
+type Todolist {
+  _id: ID!
+  title: String!
+  lastDateChanged: String
+  todos: String
+}
+
+type Query {
+  todolists: [Todolist]
+  todolist(id: ID!): Todolist 
+}
+
+type Mutation {
+    createTodolist(title: String): Todolist
+    removeTodolist(id: ID!): Todolist
+}

@@ -2,7 +2,6 @@ import { Todo } from "./todo.model";
 
 export class TodoList {
     private _title: string;
-    private _state: boolean;
     private _todos = new Array<Todo>();
     private _dateLastChange: Date;
 
@@ -19,10 +18,6 @@ export class TodoList {
     get title() : string {
         return this._title;
     }
-
-    /*get state() : boolean {
-        return this._state;
-    }*/
 
     get dateLastChange() : Date {
         return this._dateLastChange;

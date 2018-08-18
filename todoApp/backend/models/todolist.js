@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const todoListSchema = new Schema({
+const todolistSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -9,9 +9,7 @@ const todoListSchema = new Schema({
   dateLastChanged: {
     type: String
   },
-  todos: {
-    type: [String]
-  }
+  todos: String
 });
-const Model = mongoose.model('TodoList', todoListSchema);
-module.exports = Model;
+const Model = mongoose.model('Todolist', todolistSchema);
+exports.model = Model;
