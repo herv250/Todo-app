@@ -1,19 +1,18 @@
 const Todolist = require('../../models/todolist').model;
 
-
 exports.resolver = {
   Query: {
-    todolists: () => Todolist.find({})
+    todolists: () => Todolist.find()
   },
-  Mutation : {
-    createTodolist: (_, {title}) => {
-      let todolist = new Todolist({title: title});
-      todolist.save();
+  Mutation: {
+    createTodolist: (_, { title }) => {
+      let todolist = new Todolist({ title: title });      
       if (!todolist) {
         throw new Error('Error');
       }
+      todolist.save();
       return todolist;
     },
-    removeTodolist: (_, {query}) => Todolist.findByIdAndRemove(query.selector),
+    removeTodolist: (_, { id }) => Todolist.findByIdAndRemove(id)
   }
 };

@@ -39,7 +39,8 @@ app.use(
   '/graphql',
   graphqlExpress({
     schema: executableSchema,
-    graphiql: true
+    graphiql: true,
+    logger: { log: e => console.log(e) },
   })
 );
 /*
