@@ -1,4 +1,5 @@
 const Todolist = require('../../models/todolist').model;
+const dateResolver = require('../scalars/date').dateResolver;
 
 exports.resolver = {
   Query: {
@@ -6,7 +7,7 @@ exports.resolver = {
   },
   Mutation: {
     createTodolist: (_, { title }) => {
-      let todolist = new Todolist({ title: title });      
+      let todolist = new Todolist({ title: title, lastChangeDate: new Date()  });
       if (!todolist) {
         throw new Error('Error');
       }
@@ -14,5 +15,6 @@ exports.resolver = {
       return todolist;
     },
     removeTodolist: (_, { id }) => Todolist.findByIdAndRemove(id)
-  }
+  },
+  Date: dateResolver
 };
