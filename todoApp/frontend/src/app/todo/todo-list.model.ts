@@ -3,11 +3,11 @@ import { Todo } from "./todo.model";
 export class TodoList {
     private _title: string;
     private _todos = new Array<Todo>();
-    private _dateLastChange: Date;
+    private _lastChangeDate: Date;
 
     constructor(title: string){
         this._title = title;
-        this._dateLastChange = new Date();
+        this._lastChangeDate = new Date();
     }
 
     addTodo(todo: Todo){
@@ -19,8 +19,8 @@ export class TodoList {
         return this._title;
     }
 
-    get dateLastChange() : Date {
-        return this._dateLastChange;
+    get lastDateChange() : Date {
+        return this._lastChangeDate;
     }
 
     get todos() : Array<Todo>{
@@ -28,6 +28,6 @@ export class TodoList {
     }
 
     private updateLastChangeDate() {
-        this._dateLastChange = new Date();
+        this._lastChangeDate = new Date();
     }
 }

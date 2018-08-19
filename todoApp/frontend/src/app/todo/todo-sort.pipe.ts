@@ -10,9 +10,9 @@ export class TodoSortPipe implements PipeTransform {
       return null;
     }
     todolists.sort((list1: TodoList, list2: TodoList) => {
-      if (list1.dateLastChange > list2.dateLastChange) {
+      if (list1.lastDateChange > list2.lastDateChange) {
         return -1;
-      } else if (list1.dateLastChange < list2.dateLastChange) {
+      } else if (list1.lastDateChange < list2.lastDateChange) {
         return 1;
       } else {
         return 0;
