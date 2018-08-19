@@ -6,9 +6,12 @@ const todolistSchema = new Schema({
     type: String,
     required: true
   },
-  lastChangeDate: Date,
   todos:  [{type: mongoose.Schema.Types.ObjectId, 
     ref: 'Todo'}],
+}, {
+  timestamps: {
+    updatedAt: 'lastChangeDate'
+  }
 });
 const Model = mongoose.model('Todolist', todolistSchema);
 exports.model = Model;

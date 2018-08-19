@@ -2,7 +2,7 @@ type Todolist {
   _id: ID!
   title: String!
   lastChangeDate: Date
-  todos: [String]
+  todos: [Todo]
 }
 
 type Query {

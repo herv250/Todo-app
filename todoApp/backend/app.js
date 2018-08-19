@@ -62,6 +62,7 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 mongoose.connection
+  // eslint-disable-next-line
   .on('error', function(err) {
     console.log(
       'Error: Could not connect to MongoDB. Did you forget to run `mongod`?'

@@ -7,7 +7,7 @@ exports.resolver = {
   },
   Mutation: {
     createTodolist: (_, { title }) => {
-      let todolist = new Todolist({ title: title, lastChangeDate: new Date()  });
+      const todolist = new Todolist({ title: title, });
       if (!todolist) {
         throw new Error('Error');
       }
