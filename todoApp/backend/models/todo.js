@@ -10,5 +10,14 @@ const todoSchema = new Schema({
     type: Boolean
   }
 });
+
+todoSchema.pre('remove', function(next) {
+  this.model('Todolist').update(
+    {},
+    { $pull: { todos: this._id } },
+    { safe: true, multi: true },
+    next
+  );
+});
 const Model = mongoose.model('Todo', todoSchema);
 exports.model = Model;

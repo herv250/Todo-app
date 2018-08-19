@@ -8,7 +8,10 @@ exports.resolver = {
   },
   Mutation: {
     createTodo: (_, { title, todolistId }) => {
-      const t = new Todo({ title: title, state: false });
+      const t = new Todo({ 
+        title: title, 
+        state: false
+      });
       if (!t) {
         throw new Error('Error');
       }
@@ -22,7 +25,7 @@ exports.resolver = {
             todolist.todos.push(todo);
             todolist.save(err => {
               if (err) {
-                t.remove({ _id: { $in: todolist.todos[todo] } });
+                t.remove({ _id: todo._id });
                 return err;
               }
             });
