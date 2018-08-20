@@ -1,33 +1,39 @@
-import { Todo } from "./todo.model";
+import { Todo } from './todo.model';
 
-export class TodoList {
-    private _title: string;
-    private _todos = new Array<Todo>();
-    private _lastChangeDate: Date;
+export class Todolist {
+  private _title: string;
+  private _todos = new Array<Todo>();
+  private _lastChangeDate: Date;
+  private _id: string;
 
-    constructor(title: string){
-        this._title = title;
-        this._lastChangeDate = new Date();
-    }
+  constructor(title: string, todos: Todo[] = [], lastChangeDate = null) {
+    this._title = title;
+    this._todos = todos;
+    this._lastChangeDate = lastChangeDate;
+  }
 
-    addTodo(todo: Todo){
-        this._todos.push(todo);        
-        this.updateLastChangeDate();
-    }
+  get title(): string {
+    return this._title;
+  }
 
-    get title() : string {
-        return this._title;
-    }
+  get lastChangeDate(): Date {
+    return this._lastChangeDate;
+  }
 
-    get lastDateChange() : Date {
-        return this._lastChangeDate;
-    }
+  get todos(): Array<Todo> {
+    return this._todos;
+  }
 
-    get todos() : Array<Todo>{
-        return this._todos;
-    }
+  get id() {
+    console.log('this', this._id);
+    return this._id;
+  }
 
-    private updateLastChangeDate() {
-        this._lastChangeDate = new Date();
-    }
+  static fromJSON(json: any): Todolist {
+    const todos = json.todos.map(todo => Todo.fromJSON(todo));
+    const todolist = new Todolist(json.title, todos, json.lastChangeDate);
+    todolist._id = json._id;
+    console.log('convert', todolist.id);
+    return todolist;
+  }
 }

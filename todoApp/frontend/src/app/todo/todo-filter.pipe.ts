@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TodoList } from './todo-list.model';
+import { Todolist } from "./todo-list.model";
 
 @Pipe({
   name: 'todoFilter'
 })
 export class TodoFilterPipe implements PipeTransform{
 
-  transform(todoLists: TodoList[], title: string): TodoList[] {
+  transform(todoLists: Todolist[], title: string): Todolist[] {
     if(!title || title.length === 0){
       return todoLists;
     }

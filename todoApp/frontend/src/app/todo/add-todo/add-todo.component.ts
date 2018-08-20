@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TodoList } from '../todo-list.model';
+import { Todolist } from "../todo-list.model";
 
 @Component({
   selector: 'app-add-todo',
@@ -8,16 +8,16 @@ import { TodoList } from '../todo-list.model';
 })
 export class AddTodoComponent {
   @Output() 
-  public newTodoList = new EventEmitter<TodoList>();
+  public newTodoList = new EventEmitter<Todolist>();
   private addFieldValue: string;
 
   addTodoList(newTodoTitle: HTMLInputElement): boolean {
     const title = newTodoTitle.value;
     if (title && title.length > 0) {
-      const todoList = new TodoList(title);
+      const todoList = new Todolist(title);
       this.newTodoList.emit(todoList);
       this.addFieldValue = '';
     }
-    return false;
+    return false;;
   }
 }

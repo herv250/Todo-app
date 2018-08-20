@@ -15,7 +15,7 @@ export class TodoComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.state = this.todo.isDone;
+    //this.state = this.todo.isDone;
   }
 
   get title(){

@@ -1,6 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-var createError = require('http-errors');
+const createError = require('http-errors');
 var express = require('express');
 const cors = require('cors');
 //const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
@@ -14,21 +12,14 @@ const app = express();
 // view engine setup
 
 const GRAPHQL_PORT = 4000;
-const WS_PORT = 4090;
+//const WS_PORT = 4090;
 const MONGO_URL =
   process.env.MONGO_URL || 'mongodb://localhost:27017/graphql';
 
-//app.use('*', cors());
+app.use(cors());
 
 const { schema, resolver } = glue('./graphql');
 
-//const schemaFile = path.join(__dirname, './src/graphql/todolist/schema.graphql');
-//const typeDefs = fs.readFileSync(schema, 'utf8');
-
-//console.log('schema', schema);
-//console.log('resolver', resolver);
-/*const schema = require('./src/graphql/todolist/schema.graphql');
-const resolver = require('./src/graphql/todolist/resolver');*/
 
 const executableSchema = makeExecutableSchema({
   typeDefs: schema,
@@ -43,20 +34,19 @@ app.use(
     logger: { log: e => console.log(e) },
   })
 );
-/*
-app.use(
-  '/graphiql',
-  bodyParser.json(),
-  graphiqlExpress({
-    endpointURL: '/graphql'
-  })
-);*/
 
-app.listen(GRAPHQL_PORT, () =>
+app.listen(4000, () =>
   console.log(
     `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`
   )
 );
+/*
+app.head('/graphql', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Request-Method', 'GET, POST');
+  res.header('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, Content-Length');
+  res.end();
+});*/
 mongoose.connect(
   MONGO_URL,
   { useNewUrlParser: true }
@@ -74,11 +64,5 @@ mongoose.connection
   });
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-
-
-// error handler
-
 
 module.exports = app;

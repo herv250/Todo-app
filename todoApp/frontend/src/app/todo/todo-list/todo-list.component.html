@@ -4,7 +4,7 @@
         <a class="header center aligned">{{ todoList.title }}</a>
         <div class="ui divider"></div>
         <div class="meta">
-            <span class="date">last edited on {{ todoList.dateLastChange | date }}</span>
+            <span class="date">last edited on {{ todoList.lastChangeDate | date }}</span>
         </div>
         <ul class="ui list compact">
           <div *ngFor="let todo of todos" 
