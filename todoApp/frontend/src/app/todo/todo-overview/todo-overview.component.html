@@ -1,0 +1,19 @@
+<div class="ui container">
+    <div class="ui basic segment">
+      <app-add-todo (newTodoList)="addTodoList($event)">
+      </app-add-todo>
+    </div>
+    <div class="ui segment">
+      <div class="ui basic segment input">
+        <input type="text" placeholder="search to-do list..." name="filter" 
+          (keyup)='filterTodolist$.next($event.target.value)' id="filter">
+        <!--button (click)="applyFilter(filter.value)">filter</button-->
+      </div>
+      <div class="ui cards equal width">
+        <app-todo-list *ngFor='let todolist of todolists | todoSort | todoFilter: 
+          filterTodolistTitle '        
+          [todoList]='todolist'>
+        </app-todo-list>
+      </div>
+    </div>
+  </div>

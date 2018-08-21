@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Todolist } from "../todo-list.model";
+import { Component } from '@angular/core';
+import { TodoDataService } from '../todo-data.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -7,15 +7,16 @@ import { Todolist } from "../todo-list.model";
   styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent {
-  @Output() 
-  public newTodoList = new EventEmitter<Todolist>();
   private addFieldValue: string;
+
+  constructor(private _todoDataService: TodoDataService){
+
+  }
 
   addTodoList(newTodoTitle: HTMLInputElement): boolean {
     const title = newTodoTitle.value;
     if (title && title.length > 0) {
-      const todoList = new Todolist(title);
-      this.newTodoList.emit(todoList);
+      this._todoDataService.addTodoList(title);
       this.addFieldValue = '';
     }
     return false;;
