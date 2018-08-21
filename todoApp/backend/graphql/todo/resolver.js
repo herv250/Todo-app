@@ -8,7 +8,7 @@ exports.resolver = {
   },
   Mutation: {
     createTodo: (_, { title, todolistId }) => {
-      console.log('create');
+      console.log('create todo');
       const t = new Todo({ 
         title: title, 
         state: false

@@ -8,6 +8,7 @@ exports.resolver = {
   },
   Mutation: {
     createTodolist: (_, { title }) => {
+      console.log('create todolist');
       const todolist = new Todolist({ title: title });
       if (!todolist) {
         throw new Error('Error');

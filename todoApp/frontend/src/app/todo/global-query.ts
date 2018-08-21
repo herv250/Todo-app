@@ -42,3 +42,22 @@ export interface AddTodoResponse {
   todo: Todo;
   loading: boolean;
 }
+
+
+export const ADD_TODOLIST_MUTATION = gql`
+  mutation($title: String!) {
+    createTodolist(title: $title) {
+      _id
+      title
+      lastChangeDate
+      todos{
+        title
+      }
+    }
+  }
+`;
+
+export interface AddTodolistResponse {
+  todolist: Todolist;
+  loading: boolean;
+}
