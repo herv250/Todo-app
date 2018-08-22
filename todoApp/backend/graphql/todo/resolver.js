@@ -34,6 +34,6 @@ exports.resolver = {
         });
       return t;
     },
-    removeTodolist: (_, { id }) => Todo.findByIdAndRemove(id)
+    removeTodo: (_, { id }) => Todo.findByIdAndRemove(id)    
   }
 };
