@@ -12,6 +12,7 @@ const todoSchema = new Schema({
 });
 
 todoSchema.pre('remove', function(next) {
+  console.log('del todo');
   this.model('Todolist').update(
     {},
     { $pull: { todos: this._id } },
