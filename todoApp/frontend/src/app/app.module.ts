@@ -14,6 +14,15 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoOverviewComponent } from './todo/todo-overview/todo-overview.component';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component'
+
+const appRoutes: Routes = [
+  { path: 'overview', component: TodoOverviewComponent },
+  { path: 'login', component: LoginComponent }
+]
+
 
 @NgModule({
   declarations: [
@@ -24,9 +33,12 @@ import { TodoOverviewComponent } from './todo/todo-overview/todo-overview.compon
     TodoFilterPipe,
     TodoSortPipe,
     TodoOverviewComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(appRoutes),
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
