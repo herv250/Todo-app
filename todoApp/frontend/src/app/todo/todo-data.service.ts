@@ -6,28 +6,27 @@ import {
   ADD_TODO_MUTATION,
   ALL_TODOLISTS_QUERY,
   AllTodolistSResponse,
-  ADD_TODOLIST_MUTATION
+  ADD_TODOLIST_MUTATION,
+  CHANGE_TODO_STATE
 } from './global-query';
 
 @Injectable({
   providedIn: 'root'
   })
 export class TodoDataService {
-
-  constructor(private apollo: Apollo) {
-  }
+  constructor(private apollo: Apollo) {}
 
   getTodoLists() {
     return this.apollo
       .watchQuery<AllTodolistSResponse>({
       query: ALL_TODOLISTS_QUERY
-      })
-      .valueChanges
-      .pipe(
+    })
+      .valueChanges.pipe(
         map(({ data, loading }) => {
           const todolists = data.todolists.map(todoList =>
-            Todolist.fromJSON(todoList));
-            return {loading, todolists} ;
+            Todolist.fromJSON(todoList)
+          );
+          return { loading, todolists };
         })
       );
   }
@@ -84,12 +83,31 @@ export class TodoDataService {
             // Add our link from the mutation to the end.
             console.log('before', data.todolists);
             //console.log('new', new Todolist('blablabla'));
-            data.todolists    
+            data.todolists
               .find(todolist => todolist._id == listId)
               .todos.push(createTodo);
             console.log('after', data.todolists);
             // Write our data back to the cache.
             store.writeQuery({ query: ALL_TODOLISTS_QUERY, data });
+          }
+        })
+        .subscribe(response => {
+          // We injected the Router service
+          //this.router.navigate(['/']);*/
+          //console.log("should be added", todoTitle);
+        });
+    }
+  }
+
+  changeTodoState(todoId: string, state: boolean) {
+    if (todoId) {
+      //console.log('title', todoTitle);
+      this.apollo
+        .mutate({
+          mutation: CHANGE_TODO_STATE,
+          variables: {
+            id: todoId,
+            state: state
           }
         })
         .subscribe(response => {

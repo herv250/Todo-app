@@ -1,4 +1,5 @@
 <div class="ui checkbox">
-    <input type="checkbox" [(ngModel)]="state">
-    <label>{{title}}</label>
+    <input type="checkbox" #isDone [checked]="todo.state"
+        (click)="changeState(isDone)" >
+    <label>{{todo.title}}</label>
 </div>

@@ -61,3 +61,18 @@ export interface AddTodolistResponse {
   todolist: Todolist;
   loading: boolean;
 }
+
+export const CHANGE_TODO_STATE = gql`
+  mutation($id: ID!, $state: Boolean!) {
+    changeState(id: $id, state: $state) {
+      _id
+      title
+      state
+    }
+  }
+`;
+
+export interface ChangeTodoStateResponse {
+  todo: Todo;
+  loading: boolean;
+}

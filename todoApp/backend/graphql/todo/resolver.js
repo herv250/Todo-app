@@ -4,13 +4,13 @@ const Todolist = require('../../models/todolist').model;
 exports.resolver = {
   Query: {
     todos: () => Todo.find(),
-    todo: (_, {id}) => Todo.findById(id)
+    todo: (_, { id }) => Todo.findById(id)
   },
   Mutation: {
     createTodo: (_, { title, todolistId }) => {
       console.log('create todo');
-      const t = new Todo({ 
-        title: title, 
+      const t = new Todo({
+        title: title,
         state: false
       });
       if (!t) {
@@ -34,6 +34,12 @@ exports.resolver = {
         });
       return t;
     },
-    removeTodo: (_, { id }) => Todo.findByIdAndRemove(id)    
+    removeTodo: (_, { id }) => Todo.findByIdAndRemove(id),
+    changeState: (_, { id, state }) =>
+      Todo.findByIdAndUpdate(
+        id, 
+        { $set: { state: state } }, 
+        { new: true }
+      )
   }
 };

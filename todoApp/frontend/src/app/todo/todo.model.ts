@@ -12,12 +12,12 @@ export class Todo {
     return this._title;
   }
 
-  get isDone(): boolean {
+  get state(): boolean {
     return this._state;
   }
 
-  toggleState() {
-    this._state = !this._state;
+  get id(){
+    return this._id;
   }
 
   static fromJSON(json: any): Todo {
