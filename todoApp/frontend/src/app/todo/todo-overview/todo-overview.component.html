@@ -10,7 +10,8 @@
         <!--button (click)="applyFilter(filter.value)">filter</button-->
       </div>
       <div class="ui cards equal width">
-        <app-todo-list *ngFor='let todolist of todolists | todoSort | todoFilter: 
+        <h4 *ngIf="loading">Loading...</h4>
+        <app-todo-list *ngFor='let todolist of _todolists | todoSort | todoFilter: 
           filterTodolistTitle '        
           [todoList]='todolist'>
         </app-todo-list>

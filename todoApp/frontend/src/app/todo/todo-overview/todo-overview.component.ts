@@ -29,23 +29,19 @@ export class TodoOverviewComponent implements OnInit {
       )
       .subscribe(val => (this.filterTodolistTitle = val));
     //this.todolists;
-    console.log('lists', this.todolists);
+    //console.log('lists', this.todolists);
   }
 
   ngOnInit() {
    this._todoDataService.getTodoLists()
-   .subscribe(todolists => {
-        console.log('all boards', todolists);
-        //this.loading = loading;
-        this._todolists = todolists.map(todoList =>
+   .subscribe(data => {
+        console.log('all boards', data);
+        this.loading = data.loading;
+        this._todolists = data.todolists.map(todoList =>
           Todolist.fromJSON(todoList)
         );
     });
     //this._todoDataService.getTodoLists();
-  }
-
-  get todolists() {
-    return this._todolists;
   }
 
 }
