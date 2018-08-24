@@ -1,0 +1,15 @@
+type User {
+  username: String
+  firstName: String
+  lastName: String
+}
+
+type Query {
+  users: [User]
+  todolistsFromUser: [Todolist]
+  checkUsernameAvailability(username: String!): User
+}
+
+type Mutation {
+    createUser(username: String!, password: String!): User
+}
