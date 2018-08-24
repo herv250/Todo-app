@@ -1,5 +1,4 @@
-const createError = require('http-errors');
-var express = require('express');
+const express = require('express');
 const cors = require('cors');
 const graphqlExpress  = require('express-graphql');
 const mongoose = require('mongoose');
