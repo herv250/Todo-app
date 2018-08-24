@@ -1,0 +1,33 @@
+<div class="ui basic segment compact">
+    <div class="ui card compact">
+      <div class="content">
+        <a class="header center aligned">{{ todoList.title }}</a>
+        <div class="ui divider"></div>
+        <div class="meta">
+            <span class="date">last edited on {{ todoList.lastChangeDate | date }}</span>
+        </div>
+        <ul class="ui list compact">
+          <div *ngFor="let todo of todos" 
+            class="item clearing dont-break-out">
+            <app-todo [todo]="todo"></app-todo>
+          </div>        
+        </ul>
+        <div class="ui form">
+          <div class="ui mini input">
+            <input type="text" placeholder="add todo..." 
+              name="todoTitle" #newtodo class="left attached"
+              [(ngModel)]="addFieldValue" (keyup.enter)="addTodo(newtodo)"
+            />
+            <button (click)="addTodo(newtodo)" 
+            class="ui right attached icon button small">
+            <i class="plus icon"></i>
+            </button>
+          </div>
+          
+        </div>
+        <!--button class="ui icon button" (click)="removeTodo()">
+          <i class="trash outline icon"></i>
+        </button-->
+      </div>
+    </div>
+  </div>
