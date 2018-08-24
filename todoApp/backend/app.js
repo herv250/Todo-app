@@ -1,14 +1,15 @@
 const createError = require('http-errors');
 var express = require('express');
 const cors = require('cors');
-//const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
 const graphqlExpress  = require('express-graphql');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { makeExecutableSchema } = require('graphql-tools');
 const glue = require('schemaglue');
 const app = express();
-
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const users = require('./routes/users');
 // view engine setup
 
 const GRAPHQL_PORT = 4000;
@@ -16,9 +17,16 @@ const GRAPHQL_PORT = 4000;
 const MONGO_URL =
   process.env.MONGO_URL || 'mongodb://localhost:27017/graphql';
 
-app.use(cors());
+  
+let jwt = require('express-jwt');
 
-const { schema, resolver } = glue('./graphql');
+let auth = jwt({secret: process.env.TODO_BACKEND_SECRET});
+require('./config/passport');
+
+app.use(cors());
+app.use(cookieParser());
+app.use(passport.initialize());
+const { schema, resolver } = glue('./graphql', {  });
 
 
 const executableSchema = makeExecutableSchema({
@@ -28,11 +36,11 @@ const executableSchema = makeExecutableSchema({
 //console.log('test');
 app.use(
   '/graphql',
-  graphqlExpress({
+  graphqlExpress(req => ({
     schema: executableSchema,
     graphiql: true,
     logger: { log: e => console.log(e) },
-  })
+  }))
 );
 
 app.listen(4000, () =>
@@ -63,6 +71,7 @@ mongoose.connection
     console.log('Connection extablised with MongoDB');
   });
 //app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/users', users);
 
 module.exports = app;

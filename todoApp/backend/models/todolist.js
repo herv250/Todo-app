@@ -13,8 +13,14 @@ const todolistSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Todo'
       }
-    ]
+    ],
+    author: {
+      // objectId? or username
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
   },
+
   {
     timestamps: {
       updatedAt: 'lastChangeDate'
@@ -33,12 +39,10 @@ const todolistSchema = new Schema(
 
 todolistSchema.pre('remove', function(err, next) {
   console.log('test delete');
-  if (err){
+  if (err) {
     next(err);
   }
-  Todo.remove(                                                                                                                  
-    { _id: { $in: this.todos } }
-  ).exec();
+  Todo.remove({ _id: { $in: this.todos } }).exec();
   next();
 });
 

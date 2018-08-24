@@ -3,6 +3,8 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
 import { LoginComponent } from '../user/login/login.component';
+import { RegisterComponent } from '../user/register/register.component';
+
 
 const appRoutes: Routes = [
   {
@@ -10,7 +12,11 @@ const appRoutes: Routes = [
     loadChildren: 'src/app/todo/todo.module#TodoModule',
     data: { preload: true}
   },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'user',
+    loadChildren: 'src/app/user/user.module#UserModule',
+    data: { preload: true}
+  },
   { path: '', redirectTo: 'todo/overview', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
@@ -20,7 +26,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {preloadingStrategy: SelectivePreloadStrategy })
   ],
   declarations: [
-    LoginComponent
+    PageNotFoundComponent
   ],
   exports: [
     RouterModule
