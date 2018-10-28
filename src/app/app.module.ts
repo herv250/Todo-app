@@ -34,7 +34,13 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 export class AppModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
     // create Apollo
-    const uri = 'http://localhost:4000/graphql';
+    
+    //development
+    //const uri = 'http://localhost:4000/graphql';
+
+    //production
+    const uri = 'https://todo-webapp-personal.herokuapp.com/graphql';
+
     apollo.create({
       link: httpLink.create({ uri }),
       cache: new InMemoryCache()

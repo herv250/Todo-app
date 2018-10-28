@@ -40,7 +40,7 @@ app.use(
   }))
 );
 
-app.listen(4000, () =>
+app.listen(GRAPHQL_PORT, () =>
   console.log(
     `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`
   )
