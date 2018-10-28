@@ -36,7 +36,7 @@ export class AppModule {
     // create Apollo
     
     //development
-    //const uri = 'http://localhost:4000/graphql';
+    //const uri = 'http://localhost:5000/graphql';
 
     //production
     const uri = 'https://todo-webapp-personal.herokuapp.com/graphql';

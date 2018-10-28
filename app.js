@@ -12,7 +12,7 @@ const passport = require('passport');
 const users = require('./routes/users');
 // view engine setup
 
-const GRAPHQL_PORT = process.env.PORT || 4000;
+const GRAPHQL_PORT = process.env.PORT || 5000;
 //const WS_PORT = 4090;
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/graphql';
 
