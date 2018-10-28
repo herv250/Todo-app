@@ -12,7 +12,7 @@ const passport = require('passport');
 const users = require('./routes/users');
 // view engine setup
 
-const GRAPHQL_PORT = 4000;
+const GRAPHQL_PORT = process.env.PORT || 4000;
 //const WS_PORT = 4090;
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/graphql';
 
@@ -69,10 +69,10 @@ mongoose.connection
 //app.use('/', indexRouter);
 //app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/users', users);
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist/todoApp'));
 
 app.all('*', (req, res) => {
-  const indexFile = `${path.join(__dirname, 'dist')}/index.html`;
+  const indexFile = `${path.join(__dirname, 'dist')}/todoApp/index.html`;
   res.status(200).sendFile(indexFile);
 });
 module.exports = app;
