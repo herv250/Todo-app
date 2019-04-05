@@ -1,5 +1,5 @@
 # TodolistApp
 
-MEAN stack met GraphQLbovenop REST
+MEAN stack with GraphQL on top REST
 
-Herve Munyaneza
+Hervé Munyaneza
